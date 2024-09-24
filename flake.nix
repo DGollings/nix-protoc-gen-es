@@ -17,20 +17,20 @@
         };
       in pkgs.buildNpmPackage rec {
         pname = "protoc-gen-es";
-        version = "2.1.0";
+        version = "1.10.0";
 
         src = pkgs.fetchFromGitHub {
           owner = "bufbuild";
           repo = "protobuf-es";
           rev = "refs/tags/v${version}";
-          hash = "sha256-WoDdO5XYsgYN/gT1XPcPChJjuNe87dWUmInMBR9LQ3w";
+          hash = "sha256-bHl8gqNrTm1+Cnj43RWmrLDUz+G11C4gprEiNOpyOdQ=";
 
           postFetch = ''
             ${pkgs.lib.getExe pkgs.npm-lockfile-fix} $out/package-lock.json
           '';
         };
 
-        npmDepsHash = "sha256-CZHPEb3YCBKhoeXc8B4KGD5oacstodCVwAc3sfcfpog=";
+        npmDepsHash = "sha256-ozkkakfSBycu83gTs8Orhm5Tg8kRSrF/vMJxVnPjhIw=";
 
         npmWorkspace = "packages/protoc-gen-es";
 
@@ -43,7 +43,7 @@
 
         postInstall = ''
           rm -rf $out/lib/node_modules/protobuf-es/node_modules/@bufbuild
-          cp -rL node_modules/@bufbuild $out/lib/node_modules/protobuf-es/node_modules/
+          cp -rL node_modules/@bufbuild $out/lib/node_modules/
         '';
 
         meta = with pkgs.lib; {
